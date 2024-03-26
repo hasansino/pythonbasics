@@ -1,13 +1,18 @@
 # Python functionality study.
 import os
 import random
+import asyncio
 
-import my_class
+from my_class import MyClass
 from config import LOGGER as LOG
 
 
 def add(a: int, b: int) -> int:
     return a + b
+
+
+async def async_print(msg: str):
+    LOG.info("msg: {}".format(msg))
 
 
 if __name__ == "__main__":
@@ -105,7 +110,12 @@ if __name__ == "__main__":
     finally:
         LOG.info("varDivisible -> " + str(varDivisible))
 
-    oMyClass = my_class.MyClass("Hello ", "World")
+    oMyClass = MyClass("Hello ", "World")
     LOG.info("oMyClass.concat -> " + oMyClass.concat())
+
+    # coroutines
+    for i in range(10):
+        msg = "This is routine number " + str(i)
+        asyncio.run(async_print(msg))
 
     LOG.info("Python study.")
